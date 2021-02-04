@@ -1,5 +1,11 @@
 
 
+
+
+import React from 'react';
+import {View} from 'react-native';
+import {titleBar} from './ScreenComponents.js';
+
 // HOME SCREEN
 export default class HomeScreen extends React.Component {
     constructor(props) {
@@ -24,20 +30,20 @@ export default class HomeScreen extends React.Component {
       };
     }  
   
-    async componentDidMount() {
-      if (this.state.shouldUpdate) {
-        this.setPairs();
-        var meetings = await checkMeetingsHome();
-        if (meetings && meetings.length > 0) {
-          for (var meetingC = 0; meetingC < meetings.length; meetingC++) {
-            if (meetings[meetingC].updated == true) {
-              this.setState({meeting:meetings[meetingC],meetingPromptModalVisible:true});
-              meetingC = meetings.length;
-            }
-          }
-        }
-      }
-    }
+    // async componentDidMount() {
+    //   if (this.state.shouldUpdate) {
+    //     this.setPairs();
+    //     var meetings = await checkMeetingsHome();
+    //     if (meetings && meetings.length > 0) {
+    //       for (var meetingC = 0; meetingC < meetings.length; meetingC++) {
+    //         if (meetings[meetingC].updated == true) {
+    //           this.setState({meeting:meetings[meetingC],meetingPromptModalVisible:true});
+    //           meetingC = meetings.length;
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
   
     async setPairs() {
   

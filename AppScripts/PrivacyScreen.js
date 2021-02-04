@@ -1,5 +1,7 @@
 
 
+import React from 'react';
+
 // PrivacyScreen class
 export default class PrivacyScreen extends React.Component {
     constructor(props) {
@@ -23,7 +25,7 @@ export default class PrivacyScreen extends React.Component {
       return <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}>
           <View style={{flexDirection:'row',justifyContent:"center"}}>
-            <Image style={{width:100, height:100}} source={require('./assets/logo.png')} />
+            <Image style={{width:100, height:100}} source={require('../assets/logo.png')} />
           </View>
           <Text style={styles.headerSupportPrimaryText}>Read carefully and decide below.</Text>
           <View style={{height:25}}/>

@@ -1,6 +1,9 @@
 
 
 
+
+import React from 'react';
+
 export default class ContactInfoScreen extends React.Component {
     constructor(props) {
       super(props)

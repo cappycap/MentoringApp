@@ -1,5 +1,9 @@
 
 
+
+
+import React from 'react';
+
 // LOGIN AND PRIVACY SCREENS
 
 // A LoginScreen class-- used to help with some state setting problems-- "refreshing" is now within this class' scope.
@@ -27,7 +31,7 @@ export default class LoginScreen extends React.Component {
         );
       };
       return  <View style={styles.container}>
-                <Image style={{width:200, height:200}} source={require('./assets/logo.png')} />
+                <Image style={{width:200, height:200}} source={require('../assets/logo.png')} />
                 <View style={{height:20}} />
                 <LinkedInModal
                   clientID="86bzo41s6bc4am"

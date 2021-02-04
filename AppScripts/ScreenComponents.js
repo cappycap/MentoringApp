@@ -1,4 +1,12 @@
-const titleBar = (title, navFunction) => {
+
+import React from 'react';
+import {View, TouchableOpacity, IonIcon, Text} from 'react-native';
+import * as Styles from './Styles.js';
+
+const colors = Styles.colors;
+const mainTitleWidth  = Styles.mainTitleWidth;
+
+export const titleBar = (title, navFunction) => {
   return (
     <View key={title}>
       <View style={{height:25, backgroundColor: colors.vikingBlue}}></View>
@@ -14,7 +22,7 @@ const titleBar = (title, navFunction) => {
   );
 };
 
-const settingsModal = (navFunction) => {
+export const settingsModal = (navFunction) => {
   return (
     <TouchableOpacity style={{width:30,marginRight:15}} onPress={navFunction} activeOpacity={0.5}>
         <IonIcon name="ios-settings" size={30} color={colors.vikingBlue} />
@@ -22,7 +30,7 @@ const settingsModal = (navFunction) => {
   );
 }
 
-const backTitleBar = (title, navFunction, navigation) => {
+export const backTitleBar = (title, navFunction, navigation) => {
   return (
     <View key={title}>
       <View style={{height:25, backgroundColor: colors.vikingBlue}}></View>
@@ -43,7 +51,7 @@ const backTitleBar = (title, navFunction, navigation) => {
   );
 }
 
-const helpModal = (navigation) => {
+export const helpModal = (navigation) => {
   return (
     <TouchableOpacity style={{width:30,justifyContent:'center'}} onPress={() => navigation.navigate('HelpModal')} activeOpacity={0.5}>
       <IonIcon name="ios-help-circle" size={30} color={colors.vikingBlue} />
@@ -51,7 +59,7 @@ const helpModal = (navigation) => {
   );
 }
 
-const backTitleBarHelp = (title, navFunction, navigation) => {
+export const backTitleBarHelp = (title, navFunction, navigation) => {
   return (
     <View key={title}>
       <View style={{height:25, backgroundColor: colors.vikingBlue}}></View>
@@ -70,7 +78,7 @@ const backTitleBarHelp = (title, navFunction, navigation) => {
   );
 }
 
-const backTitleBarContact = (title, navigation) => {
+export const backTitleBarContact = (title, navigation) => {
   return (
     <View key={title}>
       <View style={{height:25, backgroundColor: colors.vikingBlue}}></View>

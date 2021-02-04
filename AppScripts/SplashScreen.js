@@ -1,5 +1,9 @@
 
 
+
+import React from 'react';
+import {View, Text, AsyncStorage} from 'react-native';
+
 // SPLASH SCREEN
 
 // For checking user login status...

@@ -1,5 +1,9 @@
 
 
+
+
+import React from 'react';
+
 // MEETING SCREENS
 export default class MeetingsScreen extends React.Component {
     constructor(props) {

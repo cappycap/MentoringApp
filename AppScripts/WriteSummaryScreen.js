@@ -1,6 +1,9 @@
 
 
 
+
+import React from 'react';
+
 export default class WriteSummaryScreen extends React.Component {
     constructor(props) {
       super(props)

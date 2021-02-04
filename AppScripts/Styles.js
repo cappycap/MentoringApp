@@ -1,7 +1,20 @@
 
-import {StyleSheet} from 'react-native';
 
-const colors = {
+
+import {StyleSheet, Dimensions} from 'react-native';
+
+// measurements and styles
+
+export const windowWidth = Dimensions.get('window').width;
+export const windowHeight = Dimensions.get('window').height;
+export const windowHeight6 = windowHeight / 6;
+export const mainWidth = windowWidth - 60;
+export const mainConversationWidth = windowWidth - 130;
+export const mainTitleWidth = windowWidth - 90;
+export const homeItemWidth = windowWidth - 175;
+export const contactRowWidth = windowWidth - 15;
+
+export const colors = {
     vikingBlue: '#003F87',
     white: '#fff',
     lightGrey: '#f6f6f6',
@@ -11,7 +24,7 @@ const colors = {
     yellow: '#f1c40f'
 }
   
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: colors.white,

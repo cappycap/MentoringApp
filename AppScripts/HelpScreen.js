@@ -1,5 +1,10 @@
 
 
+
+
+
+import React from 'react';
+
 // Now has an independent titlebar housed within render, since it only has a single back button.
 export default class HelpScreen extends React.Component {
     constructor(props) {
