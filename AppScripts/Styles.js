@@ -1,5 +1,5 @@
 
-
+import {StyleSheet} from 'react-native';
 
 const colors = {
     vikingBlue: '#003F87',

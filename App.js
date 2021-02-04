@@ -15,34 +15,34 @@ import { SystemMessage } from 'react-native-gifted-chat';
 
 // 1. MEASUREMENTS AND STYLES ARE LOCATED IN THE Styles.js FILE
 import * as Styles from './AppScripts/Styles.js';
-// 2. Common Screen Components are now located in ScreenComponents.js file.
-import * as ScreenComponents from './AppScripts/ScreenComponents.js';
-// 3. Date Parsing methods now in the Helper.js file.
-import * as Helper from './AppScripts/Helper.js';
-// 4. API GET AND POST METHODS ARE NOW LOCATED IN THE API.js FILE
-import * as API from './AppScripts/';
-// 5. HOME SCREEN CLASS NOW IN THE HomeScreen.js FILE
-import HomeScreen from './AppScripts/HomeScreen.js';
-// 6. ContactInfoScreen CLASS NOW IN THE ContactInfoScreen.js FILE
-import ContactInfoScreen from './AppScripts/ContactInfoScreen.js';
-// 7. MeetingScreen class now in the MeetingsScreen.js file.
-import MeetingsScreen from './AppScripts/MeetingsScreen.js';
-// 8. WriteSummaryScreen class now in the WriteSummaryScreen.js file.
-import WriteSummaryScreen from './AppScripts/WriteSummaryScreen.js';
-// 9. ProposeMeetingScreen class now in the ProposeMeetingScreen.js file.
-import ProposeMeetingScreen from './AppScripts/ProposeMeetingScreen.js';
-// 10. TopicsScreen class now in the TopicsScreen.js file.
-import TopicsScreen from './AppScripts/TopicsScreen.js';
-// 11. HelpScreen class now in the HelpScreen.js file.
-import HelpScreen from './AppScripts/HelpScreen.js';
-// 12. SplashScreen class now in the SplashScreen.js file.
-import SplashScreen from './AppScripts/SplashScreen.js';
-// 13. LoginScreen class now in the LoginScreen.js file.
-import LoginScreen from './AppScripts/LoginScreen.js';
-// 14. PrivacyScreen class now in the PrivacyScreen.js file.
-import PrivacyScreen from './AppScripts/PrivacyScreen.js';
-// 15. SettingsScreen class now in the SettingsScreen.js file.
-import SettingsScreen from './AppScripts/SettingsScreen.js';
+// // 2. Common Screen Components are now located in ScreenComponents.js file.
+// import * as ScreenComponents from './AppScripts/ScreenComponents.js';
+// // 3. Date Parsing methods now in the Helper.js file.
+// import * as Helper from './AppScripts/Helper.js';
+// // 4. API GET AND POST METHODS ARE NOW LOCATED IN THE API.js FILE
+// import * as API from './AppScripts/';
+// // 5. HOME SCREEN CLASS NOW IN THE HomeScreen.js FILE
+// import HomeScreen from './AppScripts/HomeScreen.js';
+// // 6. ContactInfoScreen CLASS NOW IN THE ContactInfoScreen.js FILE
+// import ContactInfoScreen from './AppScripts/ContactInfoScreen.js';
+// // 7. MeetingScreen class now in the MeetingsScreen.js file.
+// import MeetingsScreen from './AppScripts/MeetingsScreen.js';
+// // 8. WriteSummaryScreen class now in the WriteSummaryScreen.js file.
+// import WriteSummaryScreen from './AppScripts/WriteSummaryScreen.js';
+// // 9. ProposeMeetingScreen class now in the ProposeMeetingScreen.js file.
+// import ProposeMeetingScreen from './AppScripts/ProposeMeetingScreen.js';
+// // 10. TopicsScreen class now in the TopicsScreen.js file.
+// import TopicsScreen from './AppScripts/TopicsScreen.js';
+// // 11. HelpScreen class now in the HelpScreen.js file.
+// import HelpScreen from './AppScripts/HelpScreen.js';
+// // 12. SplashScreen class now in the SplashScreen.js file.
+// import SplashScreen from './AppScripts/SplashScreen.js';
+// // 13. LoginScreen class now in the LoginScreen.js file.
+// import LoginScreen from './AppScripts/LoginScreen.js';
+// // 14. PrivacyScreen class now in the PrivacyScreen.js file.
+// import PrivacyScreen from './AppScripts/PrivacyScreen.js';
+// // 15. SettingsScreen class now in the SettingsScreen.js file.
+// import SettingsScreen from './AppScripts/SettingsScreen.js';
 
 // Needs to be implemented:
 // import Storage from './localstorage';
@@ -131,7 +131,7 @@ export default class AppContainer extends React.Component {
     return (
         <NavigationContainer>
           <Stack.Navigator headerMode='none' initialRouteName='Splash'>
-            {/* <Stack.Screen name='Splash' component={SplashScreen} />
+            <Stack.Screen name='Splash' component={SplashScreen} />
             <Stack.Screen name='Login' component={LoginScreen} />
             <Stack.Screen name='Privacy' component={PrivacyScreen} />
             <Stack.Screen name='Main' component={HomeStack} />
@@ -139,7 +139,7 @@ export default class AppContainer extends React.Component {
             <Stack.Screen name='HelpModal' component={HelpScreen} />
             <Stack.Screen name='ProposeMeeting' component={ProposeMeetingScreen} />
             <Stack.Screen name='WriteSummary' component={WriteSummaryScreen} />
-            <Stack.Screen name='ContactInfo' component={ContactInfoScreen} /> */}
+            <Stack.Screen name='ContactInfo' component={ContactInfoScreen} />
           </Stack.Navigator>
         </NavigationContainer>
     );
