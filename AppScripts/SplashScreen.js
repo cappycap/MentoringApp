@@ -1,7 +1,9 @@
+
+
 // SPLASH SCREEN
 
 // For checking user login status...
-class SplashScreen extends React.Component {
+export default class SplashScreen extends React.Component {
     constructor(props) {
       super(props)
       this.state = {

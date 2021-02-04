@@ -1,6 +1,7 @@
-// HOME SCREEN
 
-class HomeScreen extends React.Component {
+
+// HOME SCREEN
+export default class HomeScreen extends React.Component {
     constructor(props) {
       super(props)
       this.state = {

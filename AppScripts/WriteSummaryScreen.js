@@ -1,4 +1,7 @@
-class WriteSummaryScreen extends React.Component {
+
+
+
+export default class WriteSummaryScreen extends React.Component {
     constructor(props) {
       super(props)
       this.state = {

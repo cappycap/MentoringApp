@@ -1,4 +1,7 @@
-class SettingsScreen extends React.Component {
+
+
+
+export default class SettingsScreen extends React.Component {
     constructor(props) {
       super(props);
       this.state = {

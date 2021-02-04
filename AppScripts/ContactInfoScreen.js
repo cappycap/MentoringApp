@@ -1,4 +1,7 @@
-class ContactInfoScreen extends React.Component {
+
+
+
+export default class ContactInfoScreen extends React.Component {
     constructor(props) {
       super(props)
       this.state = {

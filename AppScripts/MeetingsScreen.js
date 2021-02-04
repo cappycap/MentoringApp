@@ -1,5 +1,7 @@
+
+
 // MEETING SCREENS
-class MeetingsScreen extends React.Component {
+export default class MeetingsScreen extends React.Component {
     constructor(props) {
       super(props)
       this.state = {

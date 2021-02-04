@@ -1,5 +1,7 @@
+
+
 // PrivacyScreen class
-class PrivacyScreen extends React.Component {
+export default class PrivacyScreen extends React.Component {
     constructor(props) {
       super(props);
       this.state = {

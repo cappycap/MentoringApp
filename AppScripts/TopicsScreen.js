@@ -1,6 +1,7 @@
-// Topic Screen -- for displaying a list of all current and past monthly topics.
 
-class TopicsScreen extends React.Component {
+
+// Topic Screen -- for displaying a list of all current and past monthly topics.
+export default class TopicsScreen extends React.Component {
 
     constructor(props) {
       super(props)
