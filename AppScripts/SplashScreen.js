@@ -3,6 +3,7 @@
 
 import React from 'react';
 import {View, Text, AsyncStorage} from 'react-native';
+import {getCurrentUser} from './API.js';
 
 // SPLASH SCREEN
 
@@ -27,6 +28,7 @@ export default class SplashScreen extends React.Component {
     }
   
     render () {
+
       if (this.state.value !== null) {
         this.props.navigation.navigate('Main');
       } else {

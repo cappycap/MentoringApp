@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import React, { useState, Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Modal, TouchableHighlight, Switch, RefreshControl, Animated, Linking, TouchableOpacity, AsyncStorage, StyleSheet, Text, Image, SafeAreaView, ScrollView, View, ActivityIndicator, StatusBar, Dimensions, Alert, TextInput } from 'react-native';
+import { Modal, TouchableHighlight, Switch, RefreshControl, Animated, Linking, TouchableOpacity, AsyncStorage, StyleSheet, Text, Image, SafeAreaView, ScrollView, View, ActivityIndicator, StatusBar, Dimensions, Alert, TextInput, LogBox } from 'react-native';
 import LinkedInModal from 'react-native-linkedin';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import IonIcon from 'react-native-vector-icons/Ionicons';
@@ -10,6 +10,23 @@ import { color, debug } from 'react-native-reanimated';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Button from 'react-native-button';
 import { SystemMessage } from 'react-native-gifted-chat';
+
+
+
+// Basically Global Variables and Constants
+// accountType: 0 - not verified, please wait until admins pair you with mentor/mentees
+//              1 - verified, check for conversations to display
+// const accountType = Storage.getItem('accountType');
+const accountID = 1;
+const accountType = 0;
+const url = "http://mshipapp2.loca.lt";
+var curUser;
+const globals = {
+  accountID: 1,
+  accountType: 0,
+  url: "http://mshipapp2.loca.lt",
+}
+
 
 // Scripts
 
@@ -46,16 +63,6 @@ import SettingsScreen from './AppScripts/SettingsScreen.js';
 
 // Needs to be implemented:
 // import Storage from './localstorage';
-
-
-// Basically Global Variables and Constants
-// accountType: 0 - not verified, please wait until admins pair you with mentor/mentees
-//              1 - verified, check for conversations to display
-// const accountType = Storage.getItem('accountType');
-const accountID = 1;
-const accountType = 0;
-const url = "http://mshipapp2.loca.lt";
-var curUser;
 
 
 // Navigation controllers
@@ -112,9 +119,9 @@ function HomeStack() {
             showLabel: false
         }}
     >
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Meetings" component={MeetingsScreen} />
-        <Tab.Screen name="Topics" component={TopicsScreen} />
+        <Tab.Screen name="Home" component={HomeScreen} initialParams={globals}/>
+        <Tab.Screen name="Meetings" component={MeetingsScreen} initialParams={globals}/>
+        <Tab.Screen name="Topics" component={TopicsScreen} initialParams={globals}/>
     </Tab.Navigator>
   );
 }
@@ -128,18 +135,22 @@ export default class AppContainer extends React.Component {
   // Note: The Login and Privacy screens have been added to the Stack Navigator.
   //        I found that React Navigation creates problems when trying to pass along state.
   render() {
+
+    // console.ignoredYellowBox
+    // LogBox.ignoreLogs(['Warning: Each', 'Warning: Possible']);
+
     return (
         <NavigationContainer>
           <Stack.Navigator headerMode='none' initialRouteName='Splash'>
-            <Stack.Screen name='Splash' component={SplashScreen} />
-            <Stack.Screen name='Login' component={LoginScreen} />
-            <Stack.Screen name='Privacy' component={PrivacyScreen} />
-            <Stack.Screen name='Main' component={HomeStack} />
-            <Stack.Screen name='SettingsModal' component={SettingsScreen} />
-            <Stack.Screen name='HelpModal' component={HelpScreen} />
-            <Stack.Screen name='ProposeMeeting' component={ProposeMeetingScreen} />
-            <Stack.Screen name='WriteSummary' component={WriteSummaryScreen} />
-            <Stack.Screen name='ContactInfo' component={ContactInfoScreen} />
+            <Stack.Screen name='Splash' component={SplashScreen} initialParams={globals}/>
+            <Stack.Screen name='Login' component={LoginScreen} initialParams={globals}/>
+            <Stack.Screen name='Privacy' component={PrivacyScreen} initialParams={globals}/>
+            <Stack.Screen name='Main' component={HomeStack} initialParams={globals}/>
+            <Stack.Screen name='SettingsModal' component={SettingsScreen} initialParams={globals}/>
+            <Stack.Screen name='HelpModal' component={HelpScreen} initialParams={globals}/>
+            <Stack.Screen name='ProposeMeeting' component={ProposeMeetingScreen} initialParams={globals}/>
+            <Stack.Screen name='WriteSummary' component={WriteSummaryScreen} initialParams={globals}/>
+            <Stack.Screen name='ContactInfo' component={ContactInfoScreen} initialParams={globals}/>
           </Stack.Navigator>
         </NavigationContainer>
     );

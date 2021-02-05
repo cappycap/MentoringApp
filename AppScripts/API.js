@@ -1,7 +1,14 @@
+
+
+
+
+import {AsyncStorage} from 'react-native';
+import {accountID, accountType, url} from './globals.js';
+
 // API GET and POST Methods
 
 // Gets all pairs containing the given user as a mentor, then gets a list of mentees using those pairs.
-async function getMenteesOf (userID) {
+export async function getMenteesOf (userID) {
 
     console.log("Getting Mentees...")
   
@@ -21,7 +28,7 @@ async function getMenteesOf (userID) {
 }
   
 // Gets all pairs containing the given user as a mentee, then gets a list of mentors from those pairs.
-async function getMentorsOf (userID) {
+export async function getMentorsOf (userID) {
   
     console.log("Getting Mentors...");
   
@@ -41,7 +48,7 @@ async function getMentorsOf (userID) {
 }
 
 // Gets all pairs relative to a user's Role and a user's ID.
-async function getPairsOf(type, userID) {
+export async function getPairsOf(type, userID) {
     const pairsres = await fetch(url + '/pair/' + type + '/' + userID, {
       method: 'GET'
     });
@@ -60,20 +67,20 @@ async function getPairsOf(type, userID) {
   
 // Gets the Current User via the ensureUserExists method and the createLocalUser method.
 // Should Phase Out the CreateLocalUser method in favor of a simple .json() call on the payload.
-async function getCurrentUser () {
+export async function getCurrentUser () {
     const userPayload = await ensureUserExists();
     return createLocalUser(userPayload);
 }
   
 // Gets a user based on a certain user id.
-async function getUserByID(id) {
+export async function getUserByID(id) {
     const userPayload = await getUserPayloadByID(id);
     return createLocalUser(userPayload);
 }
   
 // Creates a javascript object out of a user payload for use elsewhere in the React Native app.
 // Note:  this should probably be replaced with a .json() call or otherwise by using JSON.parse().
-function createLocalUser(userPayload) {
+export function createLocalUser(userPayload) {
     const recordSet = userPayload["recordset"][0];
     const user = {
       id: recordSet["Id"],
@@ -92,7 +99,7 @@ function createLocalUser(userPayload) {
   
 // Finds the current user if it can, creates a new user and adds it to the database if needed.
 // All in all, Effectively accounts for when the user was created offline, or for when the API is offline.
-async function ensureUserExists () {
+export async function ensureUserExists () {
 
     const email = await AsyncStorage.getItem("Email");
     const first = await AsyncStorage.getItem('FirstName');
@@ -112,7 +119,7 @@ async function ensureUserExists () {
 }
 
 // Fetches a User Payload using a User Email.
-async function getUserPayloadByEmail(email) {
+export async function getUserPayloadByEmail(email) {
     const userres = await fetch(url + '/user/email/' + email, {
       method: 'GET'
     });
@@ -121,7 +128,7 @@ async function getUserPayloadByEmail(email) {
 }
 
 // Fetches a User Payload using a User ID.
-async function getUserPayloadByID(id) {
+export async function getUserPayloadByID(id) {
     const userres = await fetch(url + '/user/id/' + id, {
       method: 'GET'
     });
@@ -131,7 +138,7 @@ async function getUserPayloadByID(id) {
 }
   
 // Creates a User via POST
-async function postNewUser(email, first, last, pic) {
+export async function postNewUser(email, first, last, pic) {
   
     const postres = fetch(url + '/create-user', {
       method: 'POST',
@@ -152,8 +159,45 @@ async function postNewUser(email, first, last, pic) {
     });  
 }
 
+// Updates appointment status
+export async function updateAppointmentStatus(id, status) {
+  const statusupdateres = await fetch(url + '/update-appointment-status', {
+    method: 'POST',
+    body: JSON.stringify({
+      Id: id,
+      Status: status
+    }),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+}
+
+// Create Summary
+export async function createSummary(id, curSummary, userID) {
+  const postres = fetch (url + '/create-summary', {
+    method: 'POST',
+    body: JSON.stringify({
+      AppointmentId: id,
+      SummaryText: curSummary,
+      UserId: userID
+    }),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+}
+
 // Updates the privacy setting of a user, based on a given email.
-async function updatePrivacy(email, privacyAccepted) {
+export async function updatePrivacy(email, privacyAccepted) {
   
     const postres = fetch (url + '/update-privacy', {
       method: 'POST',
@@ -172,7 +216,7 @@ async function updatePrivacy(email, privacyAccepted) {
 }
 
 // Returns All of the Contact Info for a given UserID. ("cInfos" refers to various forms of contact)
-async function getContactInfoOf(userID) {
+export async function getContactInfoOf(userID) {
 
     const cInfores = await fetch(url + '/contact/' + userID, {
       method: 'GET'
@@ -193,7 +237,7 @@ async function getContactInfoOf(userID) {
 }
 
 // Returns a topic based on it's ID?  Could you a more cohesive name.
-async function retTopic(topicId) {
+export async function retTopic(topicId) {
 
     const topicRes = await fetch(url + '/topic/' + topicId, {
       method: 'GET'
@@ -208,7 +252,7 @@ async function retTopic(topicId) {
 }
 
 // Returns the current topic from the database.
-async function getCurrentTopic() {
+export async function getCurrentTopic() {
     const topicres = await fetch(url + '/current-topic', {
       method: 'GET'
     });
@@ -225,7 +269,7 @@ async function getCurrentTopic() {
   
 // Returns a list of all topics from the database
 // NOTE: excludes the current topic?  The API could use a more descriptive rename if this is the case.
-async function getAllTopics() {
+export async function getAllTopics() {
   
     const topicsres = await fetch(url + '/all-topics', {
       method: 'GET'
@@ -248,7 +292,7 @@ async function getAllTopics() {
 // Is this redundant?  (I'm not entirely sure what it does yet...)
 // Does it return a different set of meetings than the getAppointments() method?
 // Either way, it's likely we can split it up into smaller methods.
-async function checkMeetingsHome() {
+export async function checkMeetingsHome() {
 
     console.log("Checking Upcoming Appointments For Home...")
   
@@ -330,7 +374,7 @@ async function checkMeetingsHome() {
 
 // I'm certain this can be broken up into smaller, more descriptive methods.
 // (It takes up half of the API file, after all)
-async function getAppointments(type) {
+export async function getAppointments(type) {
 
     console.log("Getting Appointments...")
   

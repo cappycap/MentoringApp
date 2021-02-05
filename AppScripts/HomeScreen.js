@@ -1,10 +1,11 @@
 
 
 
-
 import React from 'react';
-import {View} from 'react-native';
-import {titleBar} from './ScreenComponents.js';
+import {AsyncStorage, View, Text, Button, IonIcon, ScrollView, RefreshControl, TouchableOpacity, Image, Modal, TextInput} from 'react-native';
+import {TitleBar, settingsModal} from './ScreenComponents.js';
+import {styles, colors} from './Styles.js';
+import {getCurrentUser, checkMeetingsHome, updateAppointmentStatus, createSummary} from './API.js';
 
 // HOME SCREEN
 export default class HomeScreen extends React.Component {
@@ -30,20 +31,20 @@ export default class HomeScreen extends React.Component {
       };
     }  
   
-    // async componentDidMount() {
-    //   if (this.state.shouldUpdate) {
-    //     this.setPairs();
-    //     var meetings = await checkMeetingsHome();
-    //     if (meetings && meetings.length > 0) {
-    //       for (var meetingC = 0; meetingC < meetings.length; meetingC++) {
-    //         if (meetings[meetingC].updated == true) {
-    //           this.setState({meeting:meetings[meetingC],meetingPromptModalVisible:true});
-    //           meetingC = meetings.length;
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
+    async componentDidMount() {
+      if (this.state.shouldUpdate) {
+        this.setPairs();
+        var meetings = await checkMeetingsHome();
+        if (meetings && meetings.length > 0) {
+          for (var meetingC = 0; meetingC < meetings.length; meetingC++) {
+            if (meetings[meetingC].updated == true) {
+              this.setState({meeting:meetings[meetingC],meetingPromptModalVisible:true});
+              meetingC = meetings.length;
+            }
+          }
+        }
+      }
+    }
   
     async setPairs() {
   
@@ -111,91 +112,41 @@ export default class HomeScreen extends React.Component {
     async submitModalSummary(id) {
       const user = JSON.parse(await AsyncStorage.getItem('User'));
       // post insert
-      const postres = fetch (url + '/create-summary', {
-        method: 'POST',
-        body: JSON.stringify({
-          AppointmentId: id,
-          SummaryText: this.state.curSummary,
-          UserId: user.id
-        }),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      createSummary(id, this.state.curSummary, user.id);
       // update appointment status
-      const statusupdateres = await fetch(url + '/update-appointment-status', {
-        method: 'POST',
-        body: JSON.stringify({
-          Id: id,
-          Status: 'Completed'
-        }),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      updateAppointmentStatus(id, 'Completed')
       // Refresh meetings state
+      this.refreshMeetings('')
+    }
+
+    async refreshMeetings(curSummary) {
       var meetings = await checkMeetingsHome();
       if (meetings && meetings.length > 0) {
         for (var meetingC = 0; meetingC < meetings.length; meetingC++) {
           if (meetings[meetingC].updated == true) {
-            this.setState({curSummary:'',meeting:meetings[meetingC],meetingPromptModalVisible:true});
+            this.setState({curSummary:curSummary,meeting:meetings[meetingC],meetingPromptModalVisible:true});
             meetingC = meetings.length;
           } else if (meetingC == meetings.length-1) {
-            this.setState({curSummary:'',writeSummaryModalVisible:false});
+            this.setState({curSummary:curSummary,writeSummaryModalVisible:false});
           }
         }
       } else {
-        this.setState({curSummary:'',writeSummaryModalVisible:false});
+        this.setState({curSummary:curSummary,writeSummaryModalVisible:false});
       }
-  
     }
   
     async processMeeting(ret, meeting) {
-  
       if (ret == 'missed') {
         // Update meeting in DB
-        const statusupdateres = await fetch(url + '/update-appointment-status', {
-          method: 'POST',
-          body: JSON.stringify({
-            Id: meeting.Id,
-            Status: 'Missed'
-          }),
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          }
-        }).catch((error) => {
-          console.error(error);
-        });
-  
-        var meetings = await checkMeetingsHome();
-        if (meetings && meetings.length > 0) {
-          for (var meetingC = 0; meetingC < meetings.length; meetingC++) {
-            if (meetings[meetingC].updated == true) {
-              this.setState({meeting:meetings[meetingC],meetingPromptModalVisible:true});
-              meetingC = meetings.length;
-            } else if (meetingC == meetings.length-1) {
-              this.setState({meetingPromptModalVisible:false});
-            }
-          }
-        } else {
-          this.setState({meetingPromptModalVisible:false});
-        }
+        updateAppointmentStatus(meeting.id, 'Missed');
+        // Refresh meeting state
+        this.refreshMeetings(this.state.curSummary);
       } else {
         this.setState({writeSummaryModalVisible:true,meetingPromptModalVisible:false});
       }
     }
   
     approvedHome() { // removed accountID from approvedHome() parameters
-  
       return (
         <ScrollView contentContainerStyle={{flex: 1, flexDirection: 'column'}}
               refreshControl={
@@ -222,7 +173,6 @@ export default class HomeScreen extends React.Component {
     };
   
     pairItem(otherUser, otherType) {
-  
       return (
         <View>
           <TouchableOpacity onPress={() =>
@@ -238,7 +188,7 @@ export default class HomeScreen extends React.Component {
               <Text style={styles.homeItemEmail}>{otherUser.Email}</Text>
             </View>
             <View style={styles.homeItemForward}>
-              <IonIcon type='Ionicons' name='ios-arrow-forward' size={30} color={colors.vikingBlue}  />
+              {/* <IonIcon type='Ionicons' name='ios-arrow-forward' size={30} color={colors.vikingBlue}  /> */}
             </View>
           </TouchableOpacity>
         </View>
@@ -246,13 +196,12 @@ export default class HomeScreen extends React.Component {
     };
   
     render() {
-  
       var meeting = this.state.meeting;
-  
+
       return (
       <View style={{flex: 1, flexDirection: 'column'}}>
-        { titleBar("Home", () => this.props.navigation.navigate('SettingsModal')) }
-        { accountType == 1 ? this.unapprovedAccount() : this.approvedHome() }
+        <TitleBar title="Home" navFunction={() => this.props.navigation.navigate('SettingsModal')}/>
+        { this.props.route.params.accountType == 1 ? this.unapprovedAccount() : this.approvedHome() }
         <Modal
           animationType="slide"
           transparent={true}
