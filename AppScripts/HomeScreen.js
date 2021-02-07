@@ -2,7 +2,8 @@
 
 
 import React from 'react';
-import {AsyncStorage, View, Text, Button, IonIcon, ScrollView, RefreshControl, TouchableOpacity, Image, Modal, TextInput} from 'react-native';
+import {AsyncStorage, View, Text, Button, ScrollView, RefreshControl, TouchableOpacity, Image, Modal, TextInput} from 'react-native';
+import IonIcon from 'react-native-vector-icons/Ionicons';
 import {TitleBar, settingsModal} from './ScreenComponents.js';
 import {styles, colors} from './Styles.js';
 import {getCurrentUser, checkMeetingsHome, updateAppointmentStatus, createSummary} from './API.js';
@@ -188,7 +189,7 @@ export default class HomeScreen extends React.Component {
               <Text style={styles.homeItemEmail}>{otherUser.Email}</Text>
             </View>
             <View style={styles.homeItemForward}>
-              {/* <IonIcon type='Ionicons' name='ios-arrow-forward' size={30} color={colors.vikingBlue}  /> */}
+              <IonIcon type='Ionicons' name='ios-arrow-forward' size={30} color={colors.vikingBlue}  />
             </View>
           </TouchableOpacity>
         </View>

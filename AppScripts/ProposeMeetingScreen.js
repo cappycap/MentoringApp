@@ -3,6 +3,9 @@
 
 
 import React from 'react';
+import {View, Text, Button, Image} from 'react-native';
+import {BackTitleBar, SettingsModal} from './ScreenComponents.js';
+import {styles, colors} from './Styles.js';
 
 export default class ProposeMeetingScreen extends React.Component {
     constructor(props) {
@@ -76,7 +79,7 @@ export default class ProposeMeetingScreen extends React.Component {
                     return this.infoItem(info);
                 })}
             </View>
-            <Button onPress={ () => this.props.navigation.navigate('ProposeMeeting', { user: user, type: type })}>
+            <Button title="Propose Meeting" onPress={ () => this.props.navigation.navigate('ProposeMeeting', { user: user, type: type })}>
                 <View style={user.homeBoxStyle}>
                     <Text style={styles.homeTag}>Propose Meeting</Text>
                 </View>
@@ -95,7 +98,9 @@ export default class ProposeMeetingScreen extends React.Component {
   
       return (
         <View style={{flex: 1, flexDirection: 'column'}}>
-          { backTitleBar("Propose Meeting", () => this.props.navigation.navigate('SettingsModal'), this.props.navigation) }
+          <BackTitleBar title="Propose Meeting" 
+            navFunction={() => this.props.navigation.navigate('SettingsModal')} 
+            navigation={this.props.navigation} />
           { this.displayCI(this.state.contactInfo) }
         </View>
       );
