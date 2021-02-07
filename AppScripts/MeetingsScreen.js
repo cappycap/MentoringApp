@@ -3,6 +3,10 @@
 
 
 import React from 'react';
+import {View, Text, Button, Image, ScrollView, RefreshControl} from 'react-native';
+import {TitleBar} from './ScreenComponents.js';
+import {styles, colors} from './Styles.js';
+import {getAppointments} from './API.js';
 
 // MEETING SCREENS
 export default class MeetingsScreen extends React.Component {
@@ -226,7 +230,10 @@ export default class MeetingsScreen extends React.Component {
   
     render () {
       return (<View style={{flex:1}} key={this.state.refreshing}>
-      { titleBar("Meetings", () => this.props.navigation.navigate('SettingsModal')) }
+      <TitleBar 
+          title="Meetings" 
+          navFunction={() => this.props.navigation.navigate('SettingsModal')}
+          navigation={this.props.navigation} />
       <ScrollView contentContainerStyle={styles.scrollView}
                   refreshControl={
                       <RefreshControl refreshing={this.state.refreshControl} onRefresh={this.onRefresh.bind(this)} />

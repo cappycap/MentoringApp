@@ -4,6 +4,10 @@
 
 
 import React from 'react';
+import {View, Text, Button, Image, ScrollView, RefreshControl} from 'react-native';
+import {TitleBar} from './ScreenComponents.js';
+import {styles, colors} from './Styles.js';
+import {getAllTopics, getCurrentTopic} from './API.js';
 
 // Topic Screen -- for displaying a list of all current and past monthly topics.
 export default class TopicsScreen extends React.Component {
@@ -84,7 +88,10 @@ export default class TopicsScreen extends React.Component {
   
       return (
         <View style={{flex: 1, flexDirection: 'column'}}>
-          { titleBar("Topics", () => this.props.navigation.navigate('SettingsModal')) }
+          <TitleBar 
+              title="Topics" 
+              navFunction={() => this.props.navigation.navigate('SettingsModal')}
+              navigation={this.props.navigation} />
           <ScrollView
             refreshControl={
                 <RefreshControl refreshing={this.state.refreshControl} onRefresh={this.onRefresh.bind(this)} />

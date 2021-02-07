@@ -3,6 +3,10 @@
 
 
 import React from 'react';
+import {View, Text, Button, ScrollView, TouchableOpacity, TextInput, Animated} from 'react-native';
+import IonIcon from 'react-native-vector-icons/Ionicons';
+import {styles, colors} from './Styles.js';
+import {} from './API.js';
 
 export default class WriteSummaryScreen extends React.Component {
     constructor(props) {

@@ -3,6 +3,9 @@
 
 
 import React from 'react';
+import {AsyncStorage, View, Button, Image} from 'react-native';
+import LinkedInModal from 'react-native-linkedin';
+import {getCurrentUser} from './API.js';
 
 // LOGIN AND PRIVACY SCREENS
 
