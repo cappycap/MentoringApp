@@ -71,6 +71,8 @@ export async function getCurrentUser () {
   console.log("CurrentUser: " + cur.user.name);
 
   const userPayload = await ensureUserExists();
+  console.log("URL: " + url);
+  console.log(userPayload);
   return createLocalUser(userPayload);
 }
   

@@ -79,7 +79,9 @@ export default class ProposeMeetingScreen extends React.Component {
                     return this.infoItem(info);
                 })}
             </View>
-            <Button title="Propose Meeting" onPress={ () => this.props.navigation.navigate('ProposeMeeting', { user: user, type: type })}>
+            <Button 
+                title="Propose Meeting" 
+                onPress={ () => this.props.navigation.navigate('ProposeMeeting', { user: user, type: type })}>
                 <View style={user.homeBoxStyle}>
                     <Text style={styles.homeTag}>Propose Meeting</Text>
                 </View>
