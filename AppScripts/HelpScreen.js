@@ -4,6 +4,9 @@
 
 
 import React from 'react';
+import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
+import IonIcon from 'react-native-vector-icons/Ionicons';
+import {styles, colors} from './Styles.js';
 
 // Now has an independent titlebar housed within render, since it only has a single back button.
 export default class HelpScreen extends React.Component {
@@ -20,7 +23,10 @@ export default class HelpScreen extends React.Component {
           <View style={{height:25, backgroundColor: colors.vikingBlue}}></View>
           <View style={{height:30, backgroundColor: colors.white}}></View>
           <View style={{flexDirection:'row', backgroundColor: colors.white, alignItems:'center'}}>
-            <TouchableOpacity style={{marginLeft:15,width:30}} onPress={() => this.props.navigation.navigate('SettingsModal')} activeOpacity={0.5}>
+            <TouchableOpacity 
+                  style={{marginLeft:15,width:30}} 
+                  onPress={() => this.props.navigation.navigate('SettingsModal')} 
+                  activeOpacity={0.5}>
               <IonIcon type='Ionicons' name='ios-arrow-back' size={30} color={colors.vikingBlue} />
             </TouchableOpacity>
             <View style={{width:mainTitleWidth,textAlign:'center',alignItems:'center'}}>

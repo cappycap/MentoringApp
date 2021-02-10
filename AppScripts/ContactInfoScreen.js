@@ -3,10 +3,11 @@
 
 
 import React from 'react';
-import {View, TouchableOpacity, Text, Button, Image} from 'react-native';
+import {View, TouchableOpacity, Text, Button, Image, AsyncStorage} from 'react-native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {BackTitleBarContact} from './ScreenComponents.js';
 import {styles, colors} from './Styles.js';
+import {getContactInfoOf} from './API.js';
 
 export default class ContactInfoScreen extends React.Component {
     constructor(props) {
@@ -24,6 +25,9 @@ export default class ContactInfoScreen extends React.Component {
     }
   
     async setContactInfo() {
+
+      console.log("setting contact info...");
+
       var newCI = [];
       var doSetAsyncStorage = false;
       const userID = this.props.route.params.user.Id;

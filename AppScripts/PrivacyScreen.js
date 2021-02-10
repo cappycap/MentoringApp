@@ -1,6 +1,11 @@
 
 
+
+
 import React from 'react';
+import {View, Text, Button, Image, ScrollView, SafeAreaView} from 'react-native';
+import {styles, colors} from './Styles.js';
+import {updatePrivacy} from './API.js';
 
 // PrivacyScreen class
 export default class PrivacyScreen extends React.Component {
