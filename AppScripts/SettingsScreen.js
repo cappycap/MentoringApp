@@ -4,6 +4,9 @@
 
 
 import React from 'react';
+import {View, Text, Button, Image, ScrollView} from 'react-native';
+import {BackTitleBarHelp} from './ScreenComponents.js';
+import {styles, colors} from './Styles.js';
 
 export default class SettingsScreen extends React.Component {
     constructor(props) {
@@ -31,7 +34,10 @@ export default class SettingsScreen extends React.Component {
     render () {
   
       return <View>
-        { backTitleBarHelp("Settings", () => this.props.navigation.navigate('HelpModal'), this.props.navigation) }
+        <BackTitleBarHelp 
+            title="Settings" 
+            navFunction={() => this.props.navigation.navigate('HelpModal')} 
+            navigation={this.props.navigation} />
         <ScrollView style={styles.scrollView}>
           <View style={{justifyContent: 'center',
           alignItems: 'center',paddingTop:25}}>
