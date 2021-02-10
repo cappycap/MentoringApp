@@ -31,7 +31,6 @@ export async function getMenteesOf (userID) {
   
 // Gets all pairs containing the given user as a mentee, then gets a list of mentors from those pairs.
 export async function getMentorsOf (userID) {
-
     console.log("Getting Mentors...");
   
     const pairs = await getPairsOf('mentee', userID);
@@ -274,7 +273,6 @@ export async function getCurrentTopic() {
 // Returns a list of all topics from the database
 // NOTE: excludes the current topic?  The API could use a more descriptive rename if this is the case.
 export async function getAllTopics() {
-
     const topicsres = await fetch(url + '/all-topics', {
       method: 'GET'
     });
