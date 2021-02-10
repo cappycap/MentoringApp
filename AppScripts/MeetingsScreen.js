@@ -170,12 +170,11 @@ export default class MeetingsScreen extends React.Component {
                 </View>
               </View>
               <Button
+                title={m.buttonText}
                 containerStyle={m.meetingButton}
                 style={m.meetingButtonText}
                 onPress={() => this.handlePress(m.buttonPress, m.Id, m.TopicId, m.summaryTitle)}
-                disabled={m.buttonDisabled}>
-                {m.buttonText}
-              </Button>
+                disabled={m.buttonDisabled} />
             </View>);
           })}
         </View>);
@@ -208,12 +207,11 @@ export default class MeetingsScreen extends React.Component {
                 </View>
               </View>
               <Button
+                title={m.buttonText}
                 containerStyle={m.meetingButton}
                 style={m.meetingButtonText}
                 onPress={() => this.handlePress(m.buttonPress, m.Id)}
-                disabled={m.buttonDisabled}>
-                {m.buttonText}
-              </Button>
+                disabled={m.buttonDisabled} />
             </View>);
           })}
         </View>);

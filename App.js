@@ -126,6 +126,9 @@ function HomeStack() {
   );
 }
 
+function emergencyLogout() {
+  AsyncStorage.clear();
+}
 
 // APP CONTAINER
 // Main class for app. Responsible for rendering app container.
@@ -136,6 +139,7 @@ export default class AppContainer extends React.Component {
   //        I found that React Navigation creates problems when trying to pass along state.
   render() {
 
+    // emergencyLogout();
     // console.ignoredYellowBox
     // LogBox.ignoreLogs(['Warning: Each', 'Warning: Possible']);
 

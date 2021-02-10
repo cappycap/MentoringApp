@@ -6,7 +6,7 @@ import {AsyncStorage, View, Text, Button, ScrollView, RefreshControl, TouchableO
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {TitleBar} from './ScreenComponents.js';
 import {styles, colors} from './Styles.js';
-import {getCurrentUser, checkMeetingsHome, updateAppointmentStatus, createSummary} from './API.js';
+import {getMentorsOf, getMenteesOf, getCurrentUser, checkMeetingsHome, updateAppointmentStatus, createSummary} from './API.js';
 
 // HOME SCREEN
 export default class HomeScreen extends React.Component {

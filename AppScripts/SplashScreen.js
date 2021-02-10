@@ -3,7 +3,7 @@
 
 import React from 'react';
 import {View, Text, AsyncStorage} from 'react-native';
-import {getCurrentUser} from './API.js';
+import {getCurrentUser, getUserPayloadByEmail} from './API.js';
 import {cur} from './globals';
 
 // SPLASH SCREEN
@@ -22,16 +22,16 @@ export default class SplashScreen extends React.Component {
   
     async setSkipValue (value) {
       this.setState({ 'value': value });
-      console.log("Splash1: " + cur.user.name);
-      if (value !== null) {
-        try {
-          cur.user = await getCurrentUser(value);
-          await AsyncStorage.setItem('User', JSON.stringify(cur.user));
-        } catch {
-          cur.user = JSON.parse(await AsyncStorage.getItem('User'));
-        }
-      }
-      console.log("Splash2: " + cur.user.name);
+      // console.log("Splash1: " + cur.user.name);
+      // if (value !== null) {
+      //   try {
+      //     cur.user = await getUserPayloadByEmail(value);
+      //     await AsyncStorage.setItem('User', JSON.stringify(cur.user));
+      //   } catch {
+      //     cur.user = JSON.parse(await AsyncStorage.getItem('User'));
+      //   }
+      // }
+      // console.log("Splash2: " + cur.user.name);
     }
   
     render () {

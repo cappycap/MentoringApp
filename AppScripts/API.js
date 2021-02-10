@@ -4,6 +4,8 @@
 
 import {AsyncStorage} from 'react-native';
 import {cur, accountID, accountType, url} from './globals.js';
+import {parseDateText, parseSimpleDateText} from './Helpers.js';
+import {styles, colors} from './Styles.js';
 
 // API GET and POST Methods
 
@@ -68,8 +70,6 @@ export async function getPairsOf(type, userID) {
 // Gets the Current User via the ensureUserExists method and the createLocalUser method.
 // Should Phase Out the CreateLocalUser method in favor of a simple .json() call on the payload.
 export async function getCurrentUser () {
-  console.log("CurrentUser: " + cur.user.name);
-
   const userPayload = await ensureUserExists();
   console.log("URL: " + url);
   console.log(userPayload);
@@ -274,8 +274,6 @@ export async function getCurrentTopic() {
 // Returns a list of all topics from the database
 // NOTE: excludes the current topic?  The API could use a more descriptive rename if this is the case.
 export async function getAllTopics() {
-  
-    console.log("TopicsUser: " + cur.user.name);
 
     const topicsres = await fetch(url + '/all-topics', {
       method: 'GET'
@@ -304,7 +302,8 @@ export async function checkMeetingsHome() {
   
     var meetings = [];
     var pairs = [];
-    var user = JSON.parse(await AsyncStorage.getItem('User'));
+    var user = getCurrentUser();
+    // var user = JSON.parse(await AsyncStorage.getItem('User'));
   
     const appres = await fetch(url + '/pair/' + user.id, {
       method: 'GET'
